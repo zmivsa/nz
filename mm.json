@@ -8,7 +8,7 @@
     {
       "id": "mm.nga",
       "name": "爱情商业",
-      "keys": ["we_token", "A_memberId"],
+      "keys": ["we_token", "A_memberId","beizhu"],
       "author": "@chouchoui",
       "repo": "https://github.com/chouchoui/QuanX/tree/master/Scripts/nga",
       "icons": ["https://raw.githubusercontent.com/chouchoui/QuanX/master/Scripts/nga/nga.png", "https://raw.githubusercontent.com/chouchoui/QuanX/master/Scripts/nga/nga.task.png"],
