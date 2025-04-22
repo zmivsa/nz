@@ -134,7 +134,7 @@ async function main() {
             startAccountIndexForChunk = index + 1; // 更新下一段的起始序号
         }
         // 每个账号处理后等待一小段时间，防止请求过于频繁
-        await $.sleep(500); // 等待 500 毫秒
+        await $.sleep(5); // 等待 500 毫秒
     }
     $.log("\n=== 所有账号处理完毕 ===");
     if (overallSummary.length === 0 && accounts.length > 0) {
