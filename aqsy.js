@@ -405,21 +405,24 @@ async function performDraw(headers, gameId, drawType, accountInfo) {
         // 1. 尝试积分兑换 (API 行为可能不同，这里模拟检查)
         const exchangeUrl = `${BASE_URL}/game/getIntegralGame/${gameId}`;
         const exchangeResult = await makeRequest('GET', exchangeUrl, headers, null, accountInfo, "尝试积分兑换抽奖次数");
-        if (!exchangeResult || exchangeResult.code !== 0) {
-            const msg = exchangeResult ? (exchangeResult.msg || `业务码 ${exchangeResult.code}`) : '请求失败';
-            if (msg.includes("机会已用完") || msg.includes("积分不足")) {
-                $.log(`[${accountInfo}] 积分兑换抽奖失败: ${msg}`);
-                return { prize: null, status: msg }; // 返回特定消息
-            } else {
-                $.error(`[${accountInfo}] 积分兑换抽奖请求失败或API返回错误: ${msg}`);
-                return { prize: null, status: `积分兑换失败: ${msg}` };
-            }
-        }
-        // 2. 如果积分兑换检查通过，执行抽奖
-        $.log(`[${accountInfo}] 积分兑换检查通过，尝试执行抽奖...`);
-        url = `${BASE_URL}/game/getById/${gameId}/0`; // 实际抽奖 URL 仍是这个？
-        action = "执行积分兑换后的抽奖";
+        url = `${BASE_URL}/game/getById/${gameId}/0`;
+        action = "执行普通抽奖";
         reqMethod = 'GET';
+        // if (!exchangeResult || exchangeResult.code !== 0) {
+        //     const msg = exchangeResult ? (exchangeResult.msg || `业务码 ${exchangeResult.code}`) : '请求失败';
+        //     if (msg.includes("机会已用完") || msg.includes("积分不足")) {
+        //         $.log(`[${accountInfo}] 积分兑换抽奖失败: ${msg}`);
+        //         return { prize: null, status: msg }; // 返回特定消息
+        //     } else {
+        //         $.error(`[${accountInfo}] 积分兑换抽奖请求失败或API返回错误: ${msg}`);
+        //         return { prize: null, status: `积分兑换失败: ${msg}` };
+        //     }
+        // }
+        // // 2. 如果积分兑换检查通过，执行抽奖
+        // $.log(`[${accountInfo}] 积分兑换检查通过，尝试执行抽奖...`);
+        // url = `${BASE_URL}/game/getById/${gameId}/0`; // 实际抽奖 URL 仍是这个？
+        // action = "执行积分兑换后的抽奖";
+        // reqMethod = 'GET';
     } else {
         $.error(`[${accountInfo}] 未知的抽奖类型: ${drawType}`);
         return { prize: null, status: "未知的抽奖类型" };
